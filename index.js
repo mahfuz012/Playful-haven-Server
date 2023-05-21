@@ -81,16 +81,16 @@ res.send(details)
 //     res.send(result)
 // })
 
-// app.get('/searchdata',async(req,res)=>{
-//   let query = {}
+app.get('/searchdata',async(req,res)=>{
+  let query = {}
 
-//   if(req.query?.Sub_category){
-//     query = {Sub_category:req.query?.Sub_category}
-// }
+  if(req.query?.Sub_category){
+    query = {Sub_category:req.query?.Sub_category}
+}
 
-//     const result = await myCollection.find(query).toArray()
-//     res.send(result)
-// })
+    const result = await myCollection.find(query).toArray()
+    res.send(result)
+})
 
 
 
