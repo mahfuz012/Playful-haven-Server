@@ -46,7 +46,7 @@ async function run() {
 
 
 app.get('/userdata',async(req,res)=>{
-  const limit = 2
+  const limit = 20
     const dataall = await myCollection.find().limit(limit).toArray()
     res.send(dataall)
 })
