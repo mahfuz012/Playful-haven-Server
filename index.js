@@ -116,7 +116,7 @@ res.send(updataData)
 
 
 
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    console.log("")
   } finally {
 
 
