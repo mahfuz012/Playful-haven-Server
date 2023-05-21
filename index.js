@@ -116,7 +116,7 @@ res.send(updataData)
 
 
 
-    console.log("")
+   
   } finally {
 
 
