@@ -50,6 +50,15 @@ app.get('/userdata',async(req,res)=>{
     res.send(dataall)
 })
 
+
+app.get('/singledata/:id',async(req,res)=>{
+  const getID = req.params.id
+  const searchData = { _id: new ObjectId(getID)}
+const details = await myCollection.findOne(searchData)
+res.send(details)
+})
+
+
 app.get('/finddata',async(req,res)=>{
   let query = {}
 
@@ -77,12 +86,7 @@ app.get('/searchdata',async(req,res)=>{
 
 
 
-app.get('/singledata/:id',async(req,res)=>{
-      const getID = req.params.id
-      const searchData = { _id: new ObjectId(getID)}
-    const details = await myCollection.findOne(searchData)
-    res.send(details)
-})
+
 
 app.post('/userdata', async(req,res)=>{
     const getData= req.body
