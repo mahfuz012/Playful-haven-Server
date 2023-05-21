@@ -86,12 +86,19 @@ app.get('/searchdata',async(req,res)=>{
 
 
 
-
-
 app.post('/userdata', async(req,res)=>{
-    const getData= req.body
-    const dataall = await myCollection.insertOne(getData)
-    res.send(dataall)
+  const getData= req.body
+  const dataall = await myCollection.insertOne(getData)
+  res.send(dataall)
+})
+
+
+
+app.delete('/deletedata/:id',async(req,res)=>{
+  const getID = req.params.id
+  const searchData = { _id: new ObjectId(getID)}
+const result = await myCollection.deleteOne(searchData)
+res.send(result)
 })
 
 
