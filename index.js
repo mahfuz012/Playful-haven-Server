@@ -67,7 +67,9 @@ app.get('/finddata',async(req,res)=>{
     query = {seller_email:req.query?.seller_email}
 }
 
-    const result = await myCollection.find(query).toArray()
+let sortField = req.query?.sort || 'Price'; 
+let sortOrder = req.query?.order === 'desc' ? -1 : 1; 
+const result = await myCollection.find(query).sort({ [sortField]: sortOrder }).toArray();
     res.send(result)
 })
 
