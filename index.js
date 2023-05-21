@@ -82,6 +82,17 @@ app.get('/searchdata',async(req,res)=>{
     res.send(result)
 })
 
+app.get('/namedata',async(req,res)=>{
+  let query = {}
+
+  if(req.query?.Name){
+    query = {Name:req.query?.Name}
+}
+
+    const result = await myCollection.find(query).toArray()
+    res.send(result)
+})
+
 
 
 
@@ -105,6 +116,7 @@ res.send(result)
 
 app.put('/update/:id', async(req,res)=>{
   const getBody = req.body
+  console.log(getBody);
   const getID = req.params.id
   const searchData = { _id: new ObjectId(getID)}
 
