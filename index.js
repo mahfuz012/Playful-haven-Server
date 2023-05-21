@@ -46,7 +46,8 @@ async function run() {
 
 
 app.get('/userdata',async(req,res)=>{
-    const dataall = await myCollection.find().toArray()
+  const limit = 2
+    const dataall = await myCollection.find().limit(limit).toArray()
     res.send(dataall)
 })
 
