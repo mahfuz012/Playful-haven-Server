@@ -75,7 +75,6 @@ app.post('/userdata', async(req,res)=>{
 })
 
 
-
 app.put('/update/:id', async(req,res)=>{
   const getBody = req.body
   const getID = req.params.id
@@ -111,17 +110,14 @@ res.send(updataData)
 
 
 
-
-
-
-
-
    
   } finally {
 
 
   }
 }
+
+
 run().catch(console.dir);
 
 
