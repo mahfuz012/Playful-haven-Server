@@ -60,14 +60,48 @@ res.send(details)
 })
 
 
-app.get('/finddata',async(req,res)=>{
-  let query = {}
 
-  if(req.query?.seller_email){
-    query = {seller_email:req.query?.seller_email}
-}
 
-let sortQuery = {};
+// app.get('/finddata',async(req,res)=>{
+//   let query = {}
+
+//   if(req.query?.seller_email){
+//     query = {seller_email:req.query?.seller_email}
+// }
+
+// let sortQuery = {};
+
+//   if (req.query?.sort === 'ascending') {
+//     sortQuery = { Price: 1 };
+//   } else if (req.query?.sort === 'descending') {
+//     sortQuery = { Price: -1 };
+//   }
+
+//   const result = await myCollection.find(query).sort(sortQuery).toArray();
+//     res.send(result)
+// })
+
+// app.get('/searchdata',async(req,res)=>{
+//   let query = {}
+
+//   if(req.query?.Sub_category){
+//     query = {Sub_category:req.query?.Sub_category}
+// }
+
+//     const result = await myCollection.find(query).toArray()
+//     res.send(result)
+// })
+
+
+
+app.get('/finddata', async (req, res) => {
+  let query = {};
+
+  if (req.query?.seller_email) {
+    query = { seller_email: req.query?.seller_email };
+  }
+
+  let sortQuery = {};
 
   if (req.query?.sort === 'ascending') {
     sortQuery = { Price: 1 };
@@ -75,20 +109,34 @@ let sortQuery = {};
     sortQuery = { Price: -1 };
   }
 
-  const result = await myCollection.find(query).sort(sortQuery).toArray();
-    res.send(result)
-})
+  const result = await myCollection.aggregate([
+    { $match: query },
+    { $addFields: { numericPrice: { $toDouble: "$Price" } } },
+    { $sort: { numericPrice: sortQuery.Price } },
+    { $project: { _id: 1, seller_name: 1, Name: 1, Sub_category: 1, Price: 1, Available_quantity: 1 } }
+  ]).toArray();
 
-app.get('/searchdata',async(req,res)=>{
-  let query = {}
+  res.send(result);
+});
 
-  if(req.query?.Sub_category){
-    query = {Sub_category:req.query?.Sub_category}
-}
 
-    const result = await myCollection.find(query).toArray()
-    res.send(result)
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/namedata',async(req,res)=>{
   let query = {}
